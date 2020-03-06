@@ -1,28 +1,29 @@
-* { margin: 0; padding: 0; box-sizing: border-box; font-size: xx-large; }
+* { margin: 0; padding: 0; box-sizing: border-box; font-size: medium; }
 body { font: 24px Helvetica, Arial; }
 #msgForm { 
-  background: #000; 
   position: fixed; 
   bottom: 0; 
   width: 100%;
   display: flex; }
 #tagForm { 
-  background: #000; 
-  position: fixed; 
+  padding-bottom: 1vh;
   top: 0; 
   width: 100%;
+  position: fixed;
   display: flex; }
 form input { 
-  height: 9vh;
   border: 0; 
-  padding: 10px; 
+  padding: 10px; }
+#pseudo { 
+  width: 40vw; }
+#hashTag { 
   width: 40vw; }
 form button { 
-  width: 20vw; 
+  width: inherit;
   background: rgb(224, 224, 224); 
   border: none; 
   padding: 10px; }
-#messages { list-style-type: none; margin: 0; padding: 0; margin-top: 40px;}
-#messages li { padding: 5px 10px; }
+#messages { list-style-type: none; margin: 5px; padding: 0; margin-top: 7vh; padding-bottom: 11vh}
+#messages li { padding: 5px 10px; overflow: auto; }
 #messages li:nth-child(odd) { background: #eee; }
-#messages { margin-top: 9vh; margin-bottom: 9vh; }
+#messages li:nth-child(even) { background: rgb(230, 235, 248); }

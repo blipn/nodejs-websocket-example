@@ -1,5 +1,5 @@
 let hashTag = 'Tristan'
-$('#pseudo').val('?')
+$('#pseudo').val('Unknown')
 $('#hashTag').val(hashTag)
 
       $(() => {
@@ -51,9 +51,9 @@ $('#hashTag').val(hashTag)
         })
 
         function submitMsgForm(){
-            message = $('#m').val()
+            message = $('#msg').val()
             socket.emit('message', { hashTag, from, message })
-            $('#m').val('')
+            $('#msg').val('')
             return false
         }
         $('#msgForm').submit(submitMsgForm);
