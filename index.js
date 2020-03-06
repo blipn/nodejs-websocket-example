@@ -25,6 +25,7 @@ app.get('/', function(req, res){
 //   message: String
 // }
 io.on('connection', (socket) => {
+  io.emit('hashtags', hashtags)
   socket.on('message', (msg) => {
     console.log(msg)
     // Envoi du message
@@ -35,14 +36,10 @@ io.on('connection', (socket) => {
     } else {
       // Ajout du hashtag
       hashtags.push(msg.hashTag)
+      io.emit('hashtags', hashtags)
     }
   });
 });
-
-setInterval(()=>{
-  io.emit('hashtags', hashtags)
-  console.log(hashtags)
-},5000)
 
 http.listen(port, function(){
   console.log('listening on *:' + port)
