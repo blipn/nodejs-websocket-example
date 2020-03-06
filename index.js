@@ -5,7 +5,7 @@ const qrcode = require('qrcode-terminal');
 const port = process.env.PORT || 3000;
 const ngrok = require('ngrok');
 
-const hashtags = ['all'];
+const hashtags = {};
 
 (async function() {
   const url = await ngrok.connect(port);
@@ -26,24 +26,41 @@ app.get('/', function(req, res){
 // }
 io.on('connection', (socket) => {
 
-  function addHashtag(text) {
-    hashtags.push(text)
-    io.emit('hashtags', hashtags)
-    console.log(`${text} added in hashtags : ${hashtags}`)
+  function addHashtag(msg) {
+    hashtags[msg.hashTag] = []
+    io.emit('hashtags', Object.keys(hashtags))
+    console.log(`${msg.hashTag} added in hashtags : ${JSON.stringify(hashtags)}`)
   }
 
-  io.emit('hashtags', hashtags)
+  io.emit('hashtags', Object.keys(hashtags))
+
+  socket.on('getMessages', (hashTag) => {
+    if(hashtags[hashTag]) {
+      socket.emit('getMessages', hashtags[hashTag]) 
+    }
+  })
+
   socket.on('message', (msg) => {
-    console.log(msg)
-    // Envoi du message
-    io.emit(msg.hashTag, msg)
+    data = { 
+      hashTag: msg.hashTag,
+      from: socket.request.connection.remoteAddress,
+      message: msg.message,
+      timeStamp: new Date()
+    }
+    console.log(data)
     
-    if(hashtags.includes(msg.hashTag)) {
+    if(hashtags[msg.hashTag]) {
       // Hashtag deja existant
     } else {
       // Ajout du hashtag
-      addHashtag(msg.hashTag)
+      addHashtag(msg)
     }
+    // Stockage du message
+    hashtags[msg.hashTag].push(data)
+    console.log(hashtags)
+
+    // Envoi du message
+    io.emit(msg.hashTag, data)
   });
 });
 
