@@ -1,6 +1,7 @@
 let hashTag = 'all'
       $(() => {
-        var socket = io()
+        const socket = io()
+        let from = 'me'
 
         function updateList(newList){
           const list = document.getElementById('hashtags');
@@ -12,29 +13,29 @@ let hashTag = 'all'
           }
         }
 
-        function show(data) {
-          $('#messages').append($('<li>').text(data))
+        function show(from, message) {
+          $('#messages').append($('<li>').text(`${from} : ${message}`))
         }
 
         function newRoom(data) {
           $('#messages').html("");
           data.forEach(element => {
-            show(element.message)
+            show('*', element.message)
           });
         }
 
-        function listen(hashTag) {
+        function listen(hashTag, from) {
           socket.on('getMessages', (messages) => {
             console.log(messages)
             newRoom(messages)
             socket.off('getMessages')
           })
-          socket.emit('getMessages', hashTag)
+          socket.emit('getMessages', { hashTag, from })
           socket.on(hashTag, (msg) => {
-            show(msg.message)
+            show(msg.from, msg.message)
             window.scrollTo(0, document.body.scrollHeight)
           })
-          show(`Connected on #${hashTag}`)
+          show('*', `Connected on #${hashTag} as ${from}`)
         }
 
         socket.on('connection', ()=>{
@@ -47,7 +48,6 @@ let hashTag = 'all'
         })
 
         $('#msgForm').submit(() => {
-          from = 'me'
           message = $('#m').val()
           socket.emit('message', { hashTag, from, message })
           $('#m').val('')
@@ -57,7 +57,8 @@ let hashTag = 'all'
         $('#tagForm').submit(() =>{
           socket.off(hashTag)
           hashTag = $('#hashTag').val()
-          listen(hashTag)
+          from = $('#pseudo').val()
+          listen(hashTag, from)
           return false
         })
 

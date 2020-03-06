@@ -26,6 +26,8 @@ app.use('/', express.static(htmlPath));
 // }
 io.on('connection', (socket) => {
 
+  let from = '?'
+
   function addHashtag(msg) {
     hashtags[msg.hashTag] = []
     io.emit('hashtags', Object.keys(hashtags))
@@ -34,20 +36,22 @@ io.on('connection', (socket) => {
 
   io.emit('hashtags', Object.keys(hashtags))
 
-  socket.on('getMessages', (hashTag) => {
-    if(hashtags[hashTag]) {
-      socket.emit('getMessages', hashtags[hashTag]) 
+  socket.on('getMessages', (data) => {
+    from = data.from
+    if(hashtags[data.hashTag]) {
+      socket.emit('getMessages', hashtags[data.hashTag]) 
     }
   })
 
   socket.on('message', (msg) => {
     data = { 
       hashTag: msg.hashTag,
-      from: socket.request.connection.remoteAddress,
+      ip: socket.request.connection.remoteAddress,
+      from,
       message: msg.message,
       timeStamp: new Date()
     }
-    console.log(data)
+    console.log(msg)
     
     if(hashtags[msg.hashTag]) {
       // Hashtag deja existant
@@ -57,7 +61,7 @@ io.on('connection', (socket) => {
     }
     // Stockage du message
     hashtags[msg.hashTag].push(data)
-    console.log(hashtags)
+    // console.log(hashtags)
 
     // Envoi du message
     io.emit(msg.hashTag, data)
