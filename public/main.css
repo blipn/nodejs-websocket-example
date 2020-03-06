@@ -16,9 +16,9 @@ form input {
   height: 9vh;
   border: 0; 
   padding: 10px; 
-  width: 75vw; }
+  width: 40vw; }
 form button { 
-  width: 25vw; 
+  width: 20vw; 
   background: rgb(224, 224, 224); 
   border: none; 
   padding: 10px; }
