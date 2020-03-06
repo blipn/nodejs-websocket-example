@@ -1,33 +1,4 @@
-<!doctype html>
-<html>
-  <head>
-    <title>Socket.IO chat</title>
-    <style>
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { font: 13px Helvetica, Arial; }
-      #msgForm { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-      #tagForm { background: #000; padding: 3px; position: fixed; top: 0; width: 100%; }
-      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-      #messages { list-style-type: none; margin: 0; padding: 0; margin-top: 40px;}
-      #messages li { padding: 5px 10px; }
-      #messages li:nth-child(odd) { background: #eee; }
-      #messages { margin-bottom: 40px }
-    </style>
-  </head>
-  <body>
-    <form id="tagForm" action="">
-      <input id="hashTag" list="hashtags" autocomplete="off" /><button>Set Hashtag</button>
-      <datalist id="hashtags"></datalist>
-    </form>
-    <ul id="messages"></ul>
-    <form id="msgForm" action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
-    </form>
-    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-    <script>
-      let hashTag = 'all'
+let hashTag = 'all'
       $(() => {
         var socket = io()
 
@@ -91,6 +62,4 @@
         })
 
       })
-    </script>
-  </body>
-</html>
+    

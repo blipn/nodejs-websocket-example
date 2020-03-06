@@ -1,23 +1,27 @@
-const app = require('express')();
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
-const qrcode = require('qrcode-terminal');
-const port = process.env.PORT || 3000;
-const ngrok = require('ngrok');
+const path = require('path')
+const express = require('express')
+const qrcode = require('qrcode-terminal')
+const ngrok = require('ngrok')
+const port = process.env.PORT || 3000
+const app = express()
+const http = require('http').Server(app)
+const io = require('socket.io')(http)
+const htmlPath = path.join(__dirname, 'public')
+const hashtags = {}
 
-const hashtags = {};
+app.use('/', express.static(htmlPath));
 
 (async function() {
   const url = await ngrok.connect(port);
   console.log(`Forwarding http://localhost:${port}/ on ${url}`)
   qrcode.generate(url, { small: true }, (qrcode) => {
     console.log(qrcode)
-  });
-})();
+  })
+})()
 
-app.get('/', function(req, res){
-  res.sendFile(__dirname + '/index.html')
-});
+// app.get('/', function(req, res){
+//   res.sendFile(__dirname + '/public/index.html')
+// })
 
 // msg: {
 //   hashTag: String,
@@ -61,9 +65,9 @@ io.on('connection', (socket) => {
 
     // Envoi du message
     io.emit(msg.hashTag, data)
-  });
-});
+  })
+})
 
 http.listen(port, function(){
   console.log('listening on *:' + port)
-});
+})
