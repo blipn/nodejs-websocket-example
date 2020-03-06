@@ -1,7 +1,7 @@
 {
-  "name": "socket-chat-example",
+  "name": "pwa-chat",
   "version": "0.0.1",
-  "description": "my first socket.io app",
+  "description": "PWA Chat",
   "dependencies": {
     "express": "^4.15.2",
     "ngrok": "^3.2.7",
