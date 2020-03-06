@@ -25,6 +25,13 @@ app.get('/', function(req, res){
 //   message: String
 // }
 io.on('connection', (socket) => {
+
+  function addHashtag(text) {
+    hashtags.push(text)
+    io.emit('hashtags', hashtags)
+    console.log(`${text} added in hashtags : ${hashtags}`)
+  }
+
   io.emit('hashtags', hashtags)
   socket.on('message', (msg) => {
     console.log(msg)
@@ -35,8 +42,7 @@ io.on('connection', (socket) => {
       // Hashtag deja existant
     } else {
       // Ajout du hashtag
-      hashtags.push(msg.hashTag)
-      io.emit('hashtags', hashtags)
+      addHashtag(msg.hashTag)
     }
   });
 });
