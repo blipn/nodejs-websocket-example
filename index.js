@@ -5,9 +5,7 @@ const ngrok = require('ngrok')
 const port = process.env.PORT || 3000
 const app = express()
 const http = require('http').Server(app)
-const io = require('socket.io')(http)
 const htmlPath = path.join(__dirname, 'public')
-const hashtags = {}
 
 app.use('/', express.static(htmlPath));
 
@@ -19,55 +17,8 @@ app.use('/', express.static(htmlPath));
   })
 })()
 
-// msg: {
-//   hashTag: String,
-//   from: String,
-//   message: String
-// }
-io.on('connection', (socket) => {
-
-  let from = '?'
-
-  function addHashtag(msg) {
-    hashtags[msg.hashTag] = []
-    io.emit('hashtags', Object.keys(hashtags))
-    console.log(`${msg.hashTag} added in hashtags : ${JSON.stringify(hashtags)}`)
-  }
-
-  io.emit('hashtags', Object.keys(hashtags))
-
-  socket.on('getMessages', (data) => {
-    from = data.from
-    if(hashtags[data.hashTag]) {
-      socket.emit('getMessages', hashtags[data.hashTag]) 
-    }
-  })
-
-  socket.on('message', (msg) => {
-    data = { 
-      hashTag: msg.hashTag,
-      ip: socket.request.connection.remoteAddress,
-      from,
-      message: msg.message,
-      timeStamp: new Date()
-    }
-    console.log(msg)
-    
-    if(hashtags[msg.hashTag]) {
-      // Hashtag deja existant
-    } else {
-      // Ajout du hashtag
-      addHashtag(msg)
-    }
-    // Stockage du message
-    hashtags[msg.hashTag].push(data)
-    // console.log(hashtags)
-
-    // Envoi du message
-    io.emit(msg.hashTag, data)
-  })
-})
-
 http.listen(port, function(){
   console.log('listening on *:' + port)
 })
+
+const ws = require('./src/server.js')(http)
