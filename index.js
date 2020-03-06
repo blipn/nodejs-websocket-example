@@ -19,10 +19,6 @@ app.use('/', express.static(htmlPath));
   })
 })()
 
-// app.get('/', function(req, res){
-//   res.sendFile(__dirname + '/public/index.html')
-// })
-
 // msg: {
 //   hashTag: String,
 //   from: String,
