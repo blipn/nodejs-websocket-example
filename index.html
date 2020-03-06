@@ -5,44 +5,79 @@
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
       body { font: 13px Helvetica, Arial; }
-      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      #msgForm { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      #tagForm { background: #000; padding: 3px; position: fixed; top: 0; width: 100%; }
       form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
       form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages { list-style-type: none; margin: 0; padding: 0; margin-top: 40px;}
       #messages li { padding: 5px 10px; }
       #messages li:nth-child(odd) { background: #eee; }
       #messages { margin-bottom: 40px }
     </style>
   </head>
   <body>
+    <form id="tagForm" action="">
+      <input id="hashTag" list="hashtags" autocomplete="off" /><button>Set Hashtag</button>
+      <datalist id="hashtags"></datalist>
+    </form>
     <ul id="messages"></ul>
-    <form action="">
+    <form id="msgForm" action="">
       <input id="m" autocomplete="off" /><button>Send</button>
-      <hr>
-      <input id="hashTag" autocomplete="on" /><button>Set Hashtag</button>
     </form>
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
-      let hashTag = '#all'
-      $(function () {
-        var socket = io();
-        $('form').submit(function(){
-          socket.off(hashTag);
+      let hashTag = 'all'
+      $(() => {
+        var socket = io()
 
-          hashTag = $('#hashTag').val();
-          from = 'me';
-          message = $('#m').val();
-          socket.emit('message', { hashTag, from, message });
-          $('#m').val('');
-          
-          socket.on(hashTag, function(msg){
-            $('#messages').append($('<li>').text(msg.message));
-            window.scrollTo(0, document.body.scrollHeight);
+        function updateList(newList){
+          const list = document.getElementById('hashtags');
+          list.innerHTML = ''
+          newList.forEach(item => {
+            let option = document.createElement('option');
+            option.value = item;   
+            list.appendChild(option);
           });
-          return false;
+        }
+
+        function show(data) {
+          $('#messages').append($('<li>').text(data))
+        }
+
+        function listen(hashTag) {
+          socket.on(hashTag, (msg) => {
+            show(msg.message)
+            window.scrollTo(0, document.body.scrollHeight)
+          })
+          show(`Connected on #${hashTag}`)
+        }
+
+        socket.on('connection', ()=>{
+          listen(hashTag)
+        })
+
+        socket.on('hashtags', (newList)=>{
+          console.log(newList)
+          updateList(newList)
+        })
+
+        $('#msgForm').submit(() => {
+          from = 'me'
+          message = $('#m').val()
+          socket.emit('message', { hashTag, from, message })
+          $('#m').val('')
+          return false
         });
-      });
+
+        $('#tagForm').submit(() =>{
+          socket.off(hashTag)
+          hashTag = $('#hashTag').val()
+          listen(hashTag)
+          return false
+        })
+
+      })
     </script>
   </body>
 </html>
