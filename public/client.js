@@ -1,4 +1,7 @@
-let hashTag = 'all'
+let hashTag = 'Tristan'
+$('#pseudo').val('?')
+$('#hashTag').val(hashTag)
+
       $(() => {
         const socket = io()
         let from = 'me'
@@ -20,7 +23,7 @@ let hashTag = 'all'
         function newRoom(data) {
           $('#messages').html("");
           data.forEach(element => {
-            show('*', element.message)
+            show(element.from, element.message)
           });
         }
 
@@ -47,20 +50,23 @@ let hashTag = 'all'
           updateList(newList)
         })
 
-        $('#msgForm').submit(() => {
-          message = $('#m').val()
-          socket.emit('message', { hashTag, from, message })
-          $('#m').val('')
-          return false
-        });
+        function submitMsgForm(){
+            message = $('#m').val()
+            socket.emit('message', { hashTag, from, message })
+            $('#m').val('')
+            return false
+        }
+        $('#msgForm').submit(submitMsgForm);
 
-        $('#tagForm').submit(() =>{
-          socket.off(hashTag)
-          hashTag = $('#hashTag').val()
-          from = $('#pseudo').val()
-          listen(hashTag, from)
-          return false
-        })
+        function submitTagForm(){
+            socket.off(hashTag)
+            hashTag = $('#hashTag').val()
+            from = $('#pseudo').val()
+            listen(hashTag, from)
+            return false
+        }
+        $('#tagForm').submit(submitTagForm)
+        submitTagForm()
 
       })
     
