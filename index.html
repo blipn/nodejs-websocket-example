@@ -18,20 +18,29 @@
     <ul id="messages"></ul>
     <form action="">
       <input id="m" autocomplete="off" /><button>Send</button>
+      <hr>
+      <input id="hashTag" autocomplete="on" /><button>Set Hashtag</button>
     </form>
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
+      let hashTag = '#all'
       $(function () {
         var socket = io();
         $('form').submit(function(){
-          socket.emit('chat message', $('#m').val());
+          socket.off(hashTag);
+
+          hashTag = $('#hashTag').val();
+          from = 'me';
+          message = $('#m').val();
+          socket.emit('message', { hashTag, from, message });
           $('#m').val('');
+          
+          socket.on(hashTag, function(msg){
+            $('#messages').append($('<li>').text(msg.message));
+            window.scrollTo(0, document.body.scrollHeight);
+          });
           return false;
-        });
-        socket.on('chat message', function(msg){
-          $('#messages').append($('<li>').text(msg));
-          window.scrollTo(0, document.body.scrollHeight);
         });
       });
     </script>
