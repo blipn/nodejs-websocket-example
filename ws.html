@@ -10,9 +10,10 @@
     ws.onopen = function () {
         console.log('websocket is connected ...')
         ws.send('connected')
+        ws.send('data', { from: 'me', hashTag: 'toto', message: 'hello!'})
     }
 
     ws.onmessage = function (ev) {
-        console.log(ev);
+        console.log(ev.data);
     }
 </script>
