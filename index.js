@@ -1,7 +1,8 @@
-var app = require('express')();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
-var port = process.env.PORT || 3000;
+const app = require('express')();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+const qrcode = require('qrcode-terminal');
+const port = process.env.PORT || 3000;
 const ngrok = require('ngrok');
 
 const hashtags = ['all'];
@@ -9,10 +10,13 @@ const hashtags = ['all'];
 (async function() {
   const url = await ngrok.connect(port);
   console.log(`Forwarding http://localhost:${port}/ on ${url}`)
+  qrcode.generate(url, { small: true }, (qrcode) => {
+    console.log(qrcode)
+  });
 })();
 
 app.get('/', function(req, res){
-  res.sendFile(__dirname + '/index.html');
+  res.sendFile(__dirname + '/index.html')
 });
 
 // msg: {
@@ -24,7 +28,7 @@ io.on('connection', (socket) => {
   socket.on('message', (msg) => {
     console.log(msg)
     // Envoi du message
-    io.emit(msg.hashTag, msg);
+    io.emit(msg.hashTag, msg)
     
     if(hashtags.includes(msg.hashTag)) {
       // Hashtag deja existant
@@ -36,10 +40,10 @@ io.on('connection', (socket) => {
 });
 
 setInterval(()=>{
-  io.emit('hashtags', hashtags); 
+  io.emit('hashtags', hashtags)
   console.log(hashtags)
 },5000)
 
 http.listen(port, function(){
-  console.log('listening on *:' + port);
+  console.log('listening on *:' + port)
 });
