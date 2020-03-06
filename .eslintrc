@@ -1,0 +1,31 @@
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb-base",
+  "env": {
+    "node": true,
+  },
+  "settings": {
+    "import/resolver": {
+      "babel-module": {}
+    }
+  },
+  "rules": {
+    "no-restricted-syntax": "off",
+    "no-prototype-builtins": "off",
+    "no-param-reassign": "off" ,
+    "no-plusplus": "off",
+    "func-names": 0,
+    "id-length": 0,
+    "new-cap": 0,
+    "no-console": 0,
+    "newline-before-return": "error",
+    "space-before-blocks": "error",
+    "import/prefer-default-export": 0,
+    "indent": ["error", 2],
+    "linebreak-style": "off",
+    "no-underscore-dangle": "off",
+    "array-callback-return": "off",
+    "import/no-extraneous-dependencies": "off",
+    "max-len": "off"
+  }
+}

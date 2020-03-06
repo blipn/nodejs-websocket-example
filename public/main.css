@@ -1,5 +1,11 @@
-* { margin: 0; padding: 0; box-sizing: border-box; font-size: medium; }
-body { font: 24px Helvetica, Arial; }
+* { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+  font-size: medium;
+  background: darkgrey; }
+body { 
+  font: 24px Helvetica, Arial; }
 #msgForm { 
   position: fixed; 
   bottom: 0; 
@@ -13,7 +19,9 @@ body { font: 24px Helvetica, Arial; }
   display: flex; }
 form input { 
   border: 0; 
-  padding: 10px; }
+  padding: 10px;
+  background: black;
+  color: aliceblue; }
 #pseudo { 
   width: 40vw; }
 #hashTag { 
@@ -23,7 +31,18 @@ form button {
   background: rgb(224, 224, 224); 
   border: none; 
   padding: 10px; }
-#messages { list-style-type: none; margin: 5px; padding: 0; margin-top: 7vh; padding-bottom: 11vh}
-#messages li { padding: 5px 10px; overflow: auto; }
-#messages li:nth-child(odd) { background: #eee; }
-#messages li:nth-child(even) { background: rgb(230, 235, 248); }
+#msg {
+  background-color: lightgray;
+  color: black; }
+#messages { 
+  list-style-type: none; 
+  margin: 5px; padding: 0; 
+  margin-top: 7vh; 
+  padding-bottom: 11vh}
+#messages li { 
+  padding: 5px 10px; 
+  overflow: auto; }
+#messages li:nth-child(odd) { 
+  background: #eee; }
+#messages li:nth-child(even) { 
+  background: rgb(230, 235, 248); }
