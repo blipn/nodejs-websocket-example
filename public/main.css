@@ -28,6 +28,10 @@ form input {
   width: 31vw; }
 #hashTag { 
   width: 31vw; }
+#install { 
+  position: fixed;
+  bottom: 0;
+  right: 0; }
 form button { 
   width: auto;
   background: rgb(224, 224, 224); 

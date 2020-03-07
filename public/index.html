@@ -23,7 +23,7 @@
 
   </head>
 
-  <body>
+  <body id="requireHTTPS">
     <form id="tagForm" action="">
       <input placeholder="pseudo" id="pseudo" autocomplete="off" class="form-control" />
       
@@ -63,17 +63,21 @@
       <ul id="messages"></ul>
     </div>
 
-    <form id="msgForm" action="">
-      <input id="msg" placeholder="..." autocomplete="off" class="form-control" />
-      <button class="btn btn-primary">Send</button>
-      <button><img src="images/icons/launchericon-48-48.png"/></button>
-    </form>
+    <div>
+      <form id="msgForm" action="">
+        <input id="msg" placeholder="..." autocomplete="off" class="form-control" />
+        <button class="btn btn-primary">Send</button>
+      </form>
+      <button id="install"><img src="images/icons/launchericon-48-48.png"/></button>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="/app.js" ></script>
     <script src="/client.js" ></script>
+    <script src="/install.js" ></script>
   </body>
 
 </html>
