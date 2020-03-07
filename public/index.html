@@ -25,14 +25,14 @@
 
   <body>
     <form id="tagForm" action="">
-      <input placeholder="pseudo" id="pseudo" autocomplete="off" />
+      <input placeholder="pseudo" id="pseudo" autocomplete="off" class="form-control" />
       
       <!-- Button trigger modal -->
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
         #
       </button>
 
-      <input placeholder="#" id="hashTag" list="hashtags" autocomplete="off" /><button>Select</button>
+      <input placeholder="#" id="hashTag" list="hashtags" autocomplete="off" class="form-control" /><button  class="btn btn-primary">Select</button>
       <datalist id="hashtags"></datalist>
     </form>
 
@@ -59,11 +59,13 @@
       </div>
     </div>
 
-    <ul id="messages"></ul>
+    <div id="bodyMsg">
+      <ul id="messages"></ul>
+    </div>
 
     <form id="msgForm" action="">
-      <input id="msg" placeholder="..." autocomplete="off" />
-      <button>Send</button>
+      <input id="msg" placeholder="..." autocomplete="off" class="form-control" />
+      <button class="btn btn-primary">Send</button>
       <button><img src="images/icons/launchericon-48-48.png"/></button>
     </form>
 

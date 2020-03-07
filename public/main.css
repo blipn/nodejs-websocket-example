@@ -2,18 +2,19 @@
   margin: 0; 
   padding: 0; 
   box-sizing: border-box; 
-  font-size: medium;
-  background: darkgrey; }
+  font-size: medium; }
 body { 
   font: 24px Helvetica, Arial;
-  background-color: darkgrey !important; }
+  background-color: #e9e9e9 !important; }
+#bodyMsg {
+  margin-top: 10vh;}
 #msgForm { 
   position: fixed; 
   bottom: 0; 
   width: 100%;
   display: flex; }
 #tagForm { 
-  padding-bottom: 1vh;
+  padding-bottom: 2px;
   top: 0; 
   width: 100%;
   position: fixed;
@@ -24,17 +25,17 @@ form input {
   background: black;
   color: aliceblue; }
 #pseudo { 
-  width: 35vw; }
+  width: 31vw; }
 #hashTag { 
-  width: 35vw; }
+  width: 31vw; }
 form button { 
-  width: inherit;
+  width: auto;
   background: rgb(224, 224, 224); 
   border: none; 
   padding: 10px; }
 #msg {
-  background-color: lightgray;
-  color: black; }
+  color: black;
+  width: auto; }
 #messages { 
   list-style-type: none; 
   margin: 5px; padding: 0; 
@@ -47,3 +48,5 @@ form button {
   background: #eee; }
 #messages li:nth-child(even) { 
   background: rgb(230, 235, 248); }
+form, input, button {
+  margin: 3px !important;}
