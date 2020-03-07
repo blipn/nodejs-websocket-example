@@ -5,7 +5,8 @@
   font-size: medium;
   background: darkgrey; }
 body { 
-  font: 24px Helvetica, Arial; }
+  font: 24px Helvetica, Arial;
+  background-color: darkgrey !important; }
 #msgForm { 
   position: fixed; 
   bottom: 0; 
@@ -23,9 +24,9 @@ form input {
   background: black;
   color: aliceblue; }
 #pseudo { 
-  width: 40vw; }
+  width: 35vw; }
 #hashTag { 
-  width: 40vw; }
+  width: 35vw; }
 form button { 
   width: inherit;
   background: rgb(224, 224, 224); 
