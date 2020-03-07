@@ -28,6 +28,10 @@ form input {
   width: 31vw; }
 #hashTag { 
   width: 31vw; }
+#hashtagsList { 
+  list-style: none;
+  line-height: 2;
+  margin-left: 10%; }
 #install { 
   position: fixed;
   bottom: 0;

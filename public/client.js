@@ -8,11 +8,22 @@ $(() => {
 
   function updateList(newList) {
     const list = document.getElementById('hashtags')
+    const hashtagsList = document.getElementById('hashtagsList')
     list.innerHTML = ''
+    hashtagsList.innerHTML = ''
     for (const [key, item] of Object.entries(newList)) {
       const option = document.createElement('option')
+      const li = document.createElement('li')
       option.value = item
+      const a = document.createElement("a")
+      a.innerHTML = `#${item}`
+      a.onclick = ()=>{
+        $('#hashTag').val(item)
+        a.style.filter = "brightness(0.5)"
+        submitTagForm()
+      }
       list.appendChild(option)
+      hashtagsList.appendChild(li).appendChild(a)
     }
   }
 
