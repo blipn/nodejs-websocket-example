@@ -1,0 +1,7 @@
+{
+  "name": "pwa-com",
+  "description": "An exemple Node.js PWA chat",
+  "repository": "https://github.com/blipn/pwa-com-pub",
+  "logo": "https://pwa-com.herokuapp.com/images/icons/launchericon-48-48.png",
+  "keywords": ["node", "pwa", "socket"]
+}
