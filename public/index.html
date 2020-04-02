@@ -21,6 +21,10 @@
     <!-- for mobile --> 
     <meta name="viewport" content="width=device-width, user-scalable=no">
 
+    <!-- Map -->
+    <script src="https://cdn-webgl.wrld3d.com/wrldjs/dist/latest/wrld.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.1/leaflet.css" rel="stylesheet" />
+
   </head>
 
   <body id="requireHTTPS">
@@ -58,15 +62,64 @@
       </div>
     </div>
 
+    <!-- Modal Map -->
+    <div class="modal fade" id="modalMap" tabindex="-1" role="dialog" aria-labelledby="modalMapLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalMapLabel">Map</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+
+            <script src="https://cdn-webgl.wrld3d.com/wrldjs/dist/latest/wrld.js"></script>
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.1/leaflet.css" rel="stylesheet" />
+            <div id="map" style="height: 250px"></div>
+            <script>
+
+              function showPosition(position) {
+                L.Wrld.map("map", "e9ec9af70dee8387d530e6d7fb4d17b1",{
+                  center: [position.coords.latitude, position.coords.longitude],
+                  zoom: 16
+                });
+              }
+
+              if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+              } else {
+                document.getElementById("map").innerHTML = "Geolocation is not supported.";
+              }
+
+            // setTimeout(function() {
+            //   map.setView([37.7952, -122.4028], 19, {
+            //     animate: false
+            //   });
+            // }, 5000);
+            </script>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div id="bodyMsg">
       <ul id="messages"></ul>
     </div>
 
-    <div>
+    <div id="footer">
       <form id="msgForm" action="">
         <input id="msg" placeholder="..." autocomplete="off" class="form-control" />
         <button class="btn btn-primary">Send</button>
       </form>
+
+      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalMap">
+        <svg class="bi bi-geo-alt" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M8 16s6-5.686 6-10A6 6 0 002 6c0 4.314 6 10 6 10zm0-7a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+        </svg>
+      </button>
+      
       <button id="install"><img src="images/icons/launchericon-48-48.png"/></button>
     </div>
 
