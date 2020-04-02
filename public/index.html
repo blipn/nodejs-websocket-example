@@ -5,7 +5,7 @@
     <title>Socket.IO chat</title>
     <link rel="stylesheet" href="/main.css">
     <link rel="manifest" href="/manifest.webmanifest">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
 
     <!-- Chrome --> 
     <link rel="icon" sizes="192x192" href="icon.png"><link rel="apple-touch-icon" href="ios-icon.png">
@@ -21,6 +21,10 @@
     <!-- for mobile --> 
     <meta name="viewport" content="width=device-width, user-scalable=no">
 
+    <!-- bootflat -->
+    <link rel="stylesheet" href="bootflat/css/site.min.css">
+    <script type="text/javascript" src="bootflat/js/site.min.js"></script>
+
     <!-- Map -->
     <script src="https://cdn-webgl.wrld3d.com/wrldjs/dist/latest/wrld.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.1/leaflet.css" rel="stylesheet" />
@@ -28,15 +32,24 @@
   </head>
 
   <body id="requireHTTPS">
-    <form id="tagForm" action="">
-      <input placeholder="pseudo" id="pseudo" autocomplete="off" class="form-control" />
-      
-      <!-- Button trigger modal -->
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        #
-      </button>
+    <form id="tagForm" class="input-group" action="">
+      <div class="col">
+        <input placeholder="pseudo" id="pseudo" autocomplete="off" class="form-control" />
+      </div>
+      <div class="input-group-btn">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary square" data-toggle="modal" data-target="#exampleModal">
+          #
+        </button>      
+      </div>
+      <div class="col">
+        <input placeholder="#" id="hashTag" list="hashtags" autocomplete="off" class="form-control" />     
+      </div>
+      <div class="input-group-btn">
+        <button class="btn btn-primary square">Select</button>   
+      </div>
 
-      <input placeholder="#" id="hashTag" list="hashtags" autocomplete="off" class="form-control" /><button  class="btn btn-primary">Select</button>
+      
       <datalist id="hashtags"></datalist>
     </form>
 
@@ -76,7 +89,7 @@
 
             <script src="https://cdn-webgl.wrld3d.com/wrldjs/dist/latest/wrld.js"></script>
             <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.1/leaflet.css" rel="stylesheet" />
-            <div id="map" style="height: 250px"></div>
+            <div id="map" style="height: 500px"></div>
             <script>
 
               function showPosition(position) {
@@ -105,22 +118,29 @@
     </div>
 
     <div id="bodyMsg">
-      <ul id="messages"></ul>
+      <div class="example-popover" id="messages"></div>
     </div>
 
-    <div id="footer">
-      <form id="msgForm" action="">
-        <input id="msg" placeholder="..." autocomplete="off" class="form-control" />
-        <button class="btn btn-primary">Send</button>
+    <div id="footer" class="input-group">
+      <form id="msgForm" class="input-group form-search" action="">
+        <input class="form-control search-query" id="msg" placeholder="..." autocomplete="off" />
+        <div class="input-group-btn">
+          <button class="btn btn-primary">Send</button>
+        </div>
       </form>
 
-      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalMap">
-        <svg class="bi bi-geo-alt" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd" d="M8 16s6-5.686 6-10A6 6 0 002 6c0 4.314 6 10 6 10zm0-7a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
-        </svg>
-      </button>
+      <div class="input-group-btn">
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalMap">
+          <svg class="bi bi-geo-alt" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M8 16s6-5.686 6-10A6 6 0 002 6c0 4.314 6 10 6 10zm0-7a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+          </svg>
+        </button>
+      </div>
+      <div class="input-group-btn">
+        <button id="install" class="btn btn-primary">PWA COM</button>
+      </div>
       
-      <button id="install"><img src="images/icons/launchericon-48-48.png"/></button>
+      
     </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

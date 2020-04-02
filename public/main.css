@@ -1,41 +1,12 @@
-* { 
-  margin: 0; 
-  padding: 0; 
-  box-sizing: border-box; 
-  font-size: medium; }
 body { 
   font: 24px Helvetica, Arial;
   background-color: #e9e9e9 !important; }
-#bodyMsg {
-  margin-top: 10vh;}
-/* #msgForm { 
-  position: fixed; 
-  bottom: 0; 
-  width: 100%;
-  display: flex; } */
-#tagForm { 
-  padding-bottom: 2px;
-  top: 0; 
-  width: 100%;
-  position: fixed;
-  display: flex; }
-form input { 
-  border: 0; 
-  padding: 10px;
-  background: black;
-  color: aliceblue; }
-#pseudo { 
-  width: 31vw; }
-#hashTag { 
-  width: 31vw; }
+/* #bodyMsg {
+  margin-top: 10vh;} */
 #hashtagsList { 
   list-style: none;
   line-height: 2;
   margin-left: 10%; }
-/* #install { 
-  position: fixed;
-  bottom: 0;
-  right: 0; } */
 form button { 
   width: auto;
   background: rgb(224, 224, 224); 
@@ -43,23 +14,31 @@ form button {
   padding: 10px; }
 #footer {
   bottom: 0;
+  position: fixed;}
+#tagForm {
   position: fixed;
-  display: inline-flex;}
-#msg {
+  top: 0;
+}
+#bodyMsg {
+  margin-top: 6vh;
+  padding-bottom: 6vh;
+  z-index: -10;
+  position: relative;
+}
+/* #msg {
   color: black;
   width: 40vw; 
-  display: initial;}
+  display: initial;} */
 #messages { 
   list-style-type: none; 
-  margin: 5px; padding: 0; 
-  margin-top: 7vh; 
-  padding-bottom: 11vh}
-#messages li { 
-  padding: 5px 10px; 
-  overflow: auto; }
-#messages li:nth-child(odd) { 
-  background: #eee; }
-#messages li:nth-child(even) { 
-  background: rgb(230, 235, 248); }
-form, input, button {
-  margin: 3px !important;}
+  margin: 20px;
+}
+.square {
+  border-radius: 0 !important;
+}
+.popover {
+  margin: 5px;
+}
+.modal-content {
+  height: 94vh;
+}

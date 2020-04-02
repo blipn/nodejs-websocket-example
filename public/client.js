@@ -2,6 +2,13 @@ let hashTag = 'Tristan'
 $('#pseudo').val('Unknown')
 $('#hashTag').val(hashTag)
 
+function randomId() {
+  const uint32 = window.crypto.getRandomValues(new Uint32Array(1))[0];
+  return uint32.toString(16);
+}
+
+const myId = randomId();
+
 $(() => {
   const socket = io()
   let from = 'me'
@@ -27,14 +34,26 @@ $(() => {
     }
   }
 
-  function show(from, message) {
-    $('#messages').append($('<li>').text(`${from} : ${message}`))
+  function show(from, message, id) {
+    // $('#messages').append($('<li>').text(`${from} : ${message}`))
+    const messages = document.querySelector("#messages")
+    const popover = document.createElement("div")
+    popover.setAttribute('class', id===myId ? 'popover right' : 'popover left')
+    const title = document.createElement("h3")
+    title.setAttribute('class', 'popover-title')
+    title.appendChild(document.createTextNode(from))
+    const content = document.createElement("div")
+    content.setAttribute('class', 'popover-content')
+    content.appendChild(document.createTextNode(message))
+    popover.appendChild(title)
+    popover.appendChild(content)
+    messages.appendChild(popover)
   }
 
   function newRoom(data) {
     $('#messages').html('')
     data.forEach((element) => {
-      show(element.from, element.message)
+      show(element.from, element.message, element.id)
     })
   }
 
@@ -46,10 +65,10 @@ $(() => {
     })
     socket.emit('getMessages', { hashTag, from })
     socket.on(hashTag, (msg) => {
-      show(msg.from, msg.message)
+      show(msg.from, msg.message, msg.id)
       window.scrollTo(0, document.body.scrollHeight)
     })
-    show('*', `Connected on #${hashTag} as ${from}`)
+    show('*', `Connected on #${hashTag} as ${from}`, '*')
   }
 
   socket.on('connection', () => {
@@ -63,7 +82,7 @@ $(() => {
 
   function submitMsgForm() {
     message = $('#msg').val()
-    socket.emit('message', { hashTag, from, message })
+    socket.emit('message', { hashTag, from, message, id:myId })
     $('#msg').val('')
 
     return false
