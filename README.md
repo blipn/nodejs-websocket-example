@@ -1,5 +1,7 @@
 # pwa chat
 
+Poc of a progressive web app for chatting
+
 The PWA-COM application allows users to easily chat with each other in real time through hashtags and without authentication. There is no persistant data, everything is in memory.
 
 See our [Wiki](https://github.com/blipn/pwa-com-pub/wiki) here 
