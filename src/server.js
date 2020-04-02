@@ -30,6 +30,7 @@ module.exports = (http) => {
       const data = {
         hashTag: msg.hashTag,
         ip: socket.request.connection.remoteAddress,
+        id: msg.id,
         from,
         message: msg.message,
         timeStamp: new Date(),
