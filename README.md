@@ -7,6 +7,8 @@ The PWA-COM application allows users to easily chat with each other in real time
 - See our [Wiki](https://github.com/blipn/pwa-com-pub/wiki) here 
 - Access the PWA [here](https://pwa-com.herokuapp.com/) hosted with Heroku
 
+You can easily deploy your own instance in one click :
+
  [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 ## How to run
