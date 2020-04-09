@@ -5,7 +5,7 @@ module.exports = (http) => {
   const hashtags = {};
 
   const socketAntiSpam = new SocketAntiSpam({
-    banTime: 30, // Ban time in minutes
+    banTime: 10, // Ban time in minutes
     kickThreshold: 3, // User gets kicked after this many spam score
     kickTimesBeforeBan: 2, // User gets banned after this many kicks
     banning: true, // Uses temp IP banning after kickTimesBeforeBan
