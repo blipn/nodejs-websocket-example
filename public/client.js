@@ -52,7 +52,7 @@ $(() => {
     try {
       L.marker([latitude, longitude]).addTo(map).bindPopup(from)
     } catch (error) {
-      console.log(error)
+      // console.log(error)
     }
 
 
@@ -67,7 +67,6 @@ $(() => {
 
   function listen(hashTag, from) {
     socket.on('getMessages', (messages) => {
-      console.log(messages)
       newRoom(messages)
       socket.off('getMessages')
     })
@@ -84,14 +83,23 @@ $(() => {
   })
 
   socket.on('hashtags', (newList) => {
-    console.log(newList)
     updateList(newList)
   })
 
   function submitMsgForm() {
     message = $('#msg').val()
+
+    const latitude = null
+    const longitude = null
+
+    try {
+      latitude = latLong.latitude
+      longitude = latLong.longitude
+    } catch (error) {
+      console.log('You need to activate your geolocation')
+    }
     
-    socket.emit('message', { hashTag, from, message, id:myId, latitude: latLong.latitude, longitude: latLong.longitude })
+    socket.emit('message', { hashTag, from, message, id:myId, latitude, longitude })
     $('#msg').val('')
     return false
   }
