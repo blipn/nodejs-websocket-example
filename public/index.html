@@ -3,7 +3,6 @@
 
   <head>
     <title>Socket.IO chat</title>
-    <link rel="stylesheet" href="/main.css">
     <link rel="manifest" href="/manifest.webmanifest">
 
     <!-- Chrome --> 
@@ -32,14 +31,14 @@
     integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
     crossorigin=""></script>
     <meta name="description" content="Application de communication par hashtags" />
+    <link rel="stylesheet" href="/main.css">
   </head>
 
   <body id="requireHTTPS">
     <form id="tagForm" class="input-group" action="">
       <div class="col">
-        <label>Pseudo
-          <input placeholder="pseudo" id="pseudo" autocomplete="off" class="form-control" />
-        </label>
+        <label>Pseudo</label>
+        <input placeholder="pseudo" id="pseudo" autocomplete="off" class="form-control" />
       </div>
       <div class="input-group-btn">
         <!-- Button trigger modal -->
@@ -48,9 +47,8 @@
         </button>      
       </div>
       <div class="col">
-        <label>Hashtag
+        <label>Hashtag</label>
         <input placeholder="#" id="hashTag" list="hashtags" autocomplete="off" class="form-control" /> 
-      </label>    
       </div>
       <div class="input-group-btn">
         <button class="btn btn-primary square" aria-label="Select Login">Select</button>   
@@ -133,9 +131,8 @@
 
     <div id="footer" class="input-group">
       <form id="msgForm" class="input-group form-search" action="">
-        <label>Message
+        <label>Message</label>
         <input class="form-control search-query" id="msg" placeholder="..." autocomplete="off" />
-      </label>
         <div class="input-group-btn">
           <button class="btn btn-primary" aria-label="Send Message">Send</button>
         </div>
