@@ -93,12 +93,18 @@
             <div id="map" style="height: 500px; width: 100%;"></div>
             <script>
 
-              function showPosition(position) {
+              let latLong = null
 
-                var map = L.map('map', {
-                    center: [position.coords.latitude, position.coords.longitude],
-                    zoom: 13
-                });
+              var map = L.map('map', {
+                    center: [5, 5],
+                    zoom: 5
+              });
+
+              function showPosition(position) {
+                latLong = position.coords
+
+                map.setView([position.coords.latitude, position.coords.longitude], 13);
+
                 L.tileLayer('//{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
                     maxZoom: 18,
                 }).addTo(map);

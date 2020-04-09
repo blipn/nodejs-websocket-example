@@ -3,11 +3,6 @@ module.exports = (http) => {
   const io = require('socket.io')(http);
   const hashtags = {};
 
-  // msg: {
-  //   hashTag: String,
-  //   from: String,
-  //   message: String
-  // }
   io.on('connection', (socket) => {
     let from = '?';
 
@@ -31,6 +26,8 @@ module.exports = (http) => {
         hashTag: msg.hashTag,
         ip: socket.request.connection.remoteAddress,
         id: msg.id,
+        latitude: msg.latitude,
+        longitude: msg.longitude,
         from,
         message: msg.message,
         timeStamp: new Date(),

@@ -34,7 +34,7 @@ $(() => {
     }
   }
 
-  function show(from, message, id) {
+  function show(from, message, id, latitude, longitude) {
     // $('#messages').append($('<li>').text(`${from} : ${message}`))
     const messages = document.querySelector("#messages")
     const popover = document.createElement("div")
@@ -48,12 +48,20 @@ $(() => {
     popover.appendChild(title)
     popover.appendChild(content)
     messages.appendChild(popover)
+
+    try {
+      L.marker([latitude, longitude]).addTo(map)
+    } catch (error) {
+      console.log(error)
+    }
+
+
   }
 
   function newRoom(data) {
     $('#messages').html('')
     data.forEach((element) => {
-      show(element.from, element.message, element.id)
+      show(element.from, element.message, element.id, element.latitude, element.longitude)
     })
   }
 
@@ -65,7 +73,7 @@ $(() => {
     })
     socket.emit('getMessages', { hashTag, from })
     socket.on(hashTag, (msg) => {
-      show(msg.from, msg.message, msg.id)
+      show(msg.from, msg.message, msg.id, msg.latitude, msg.longitude)
       window.scrollTo(0, document.body.scrollHeight)
     })
     show('*', `Connected on #${hashTag} as ${from}`, '*')
@@ -82,9 +90,9 @@ $(() => {
 
   function submitMsgForm() {
     message = $('#msg').val()
-    socket.emit('message', { hashTag, from, message, id:myId })
+    
+    socket.emit('message', { hashTag, from, message, id:myId, latitude: latLong.latitude, longitude: latLong.longitude })
     $('#msg').val('')
-
     return false
   }
   $('#msgForm').submit(submitMsgForm)
