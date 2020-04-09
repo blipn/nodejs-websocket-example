@@ -1,7 +1,21 @@
 /* eslint-disable global-require */
 module.exports = (http) => {
+  const SocketAntiSpam = require('socket-anti-spam');
   const io = require('socket.io')(http);
   const hashtags = {};
+
+  const socketAntiSpam = new SocketAntiSpam({
+    banTime: 30, // Ban time in minutes
+    kickThreshold: 3, // User gets kicked after this many spam score
+    kickTimesBeforeBan: 2, // User gets banned after this many kicks
+    banning: true, // Uses temp IP banning after kickTimesBeforeBan
+    io, // Bind the socket.io variable
+    // redis: client, // Redis client if you are sharing multiple servers
+  });
+
+  socketAntiSpam.event.on('ban', (data) => {
+    console.log('IP banned :', data.ip);
+  });
 
   io.on('connection', (socket) => {
     let from = '?';

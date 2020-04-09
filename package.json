@@ -6,6 +6,7 @@
     "express": "^4.15.2",
     "heroku-ssl-redirect": "0.0.4",
     "qrcode-terminal": "^0.12.0",
+    "socket-anti-spam": "^2.0.0",
     "socket.io": "^1.7.3"
   },
   "scripts": {
