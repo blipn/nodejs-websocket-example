@@ -51,6 +51,8 @@ form button {
 
 .btn {
   font-size: 20px !important;
+  background-color: #0c566c!important;
+
 }
 
 .popover {
@@ -58,6 +60,10 @@ form button {
   margin: 5px;
   clear: both;
   max-width:80% !important;
+}
+
+.popover-title {
+	color:white!important;
 }
 
 .popover.right {

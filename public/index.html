@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="fr">
 
   <head>
     <title>Socket.IO chat</title>
@@ -18,7 +18,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
     <!-- for mobile --> 
-    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta name="viewport" content="width=device-width">
 
     <!-- bootflat -->
     <link rel="stylesheet" href="bootflat/css/site.min.css">
@@ -37,7 +37,9 @@
   <body id="requireHTTPS">
     <form id="tagForm" class="input-group" action="">
       <div class="col">
-        <input placeholder="pseudo" id="pseudo" autocomplete="off" class="form-control" />
+        <label>Pseudo
+          <input placeholder="pseudo" id="pseudo" autocomplete="off" class="form-control" />
+        </label>
       </div>
       <div class="input-group-btn">
         <!-- Button trigger modal -->
@@ -46,7 +48,9 @@
         </button>      
       </div>
       <div class="col">
-        <input placeholder="#" id="hashTag" list="hashtags" autocomplete="off" class="form-control" />     
+        <label>Hashtag
+        <input placeholder="#" id="hashTag" list="hashtags" autocomplete="off" class="form-control" /> 
+      </label>    
       </div>
       <div class="input-group-btn">
         <button class="btn btn-primary square" aria-label="Select Login">Select</button>   
@@ -129,7 +133,9 @@
 
     <div id="footer" class="input-group">
       <form id="msgForm" class="input-group form-search" action="">
+        <label>Message
         <input class="form-control search-query" id="msg" placeholder="..." autocomplete="off" />
+      </label>
         <div class="input-group-btn">
           <button class="btn btn-primary" aria-label="Send Message">Send</button>
         </div>
