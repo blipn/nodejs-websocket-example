@@ -89,8 +89,8 @@ $(() => {
   function submitMsgForm() {
     message = $('#msg').val()
 
-    const latitude = null
-    const longitude = null
+    let latitude = null
+    let longitude = null
 
     try {
       latitude = latLong.latitude

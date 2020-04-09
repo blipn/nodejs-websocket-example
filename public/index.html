@@ -90,7 +90,8 @@
             </button>
           </div>
           <div class="modal-body">
-            <div id="map" style="height: 500px; width: 100%;"></div>
+            <div id="underMap" style="text-align: center;"><b style="color: red;">Geolocation is not supported or inactive</b></div>
+            <div id="map" style="height: 70vh; width: 100%;"></div>
             <script>
 
               let latLong = null
@@ -102,6 +103,12 @@
 
               function showPosition(position) {
                 latLong = position.coords
+
+                if(!latLong.latitude || !latLong.longitude) {
+                  document.getElementById("underMap").style.display = 'block';
+                } else {
+                  document.getElementById("underMap").style.display = 'none';
+                }
 
                 map.setView([position.coords.latitude, position.coords.longitude], 13);
 
@@ -120,7 +127,7 @@
               if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showPosition);
               } else {
-                document.getElementById("map").innerHTML = "Geolocation is not supported.";
+                document.getElementById("underMap").style.display = 'block';
               }
               
 
