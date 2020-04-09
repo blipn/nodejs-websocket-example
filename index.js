@@ -2,9 +2,15 @@ const path = require('path');
 const express = require('express');
 const qrcode = require('qrcode-terminal');
 const ngrok = require('ngrok');
+const sslRedirect = require('heroku-ssl-redirect');
 
 const port = process.env.PORT || 3000;
 const app = express();
+
+if (process.env.NODE_ENV !== 'development') {
+  app.use(sslRedirect());
+}
+
 const http = require('http').Server(app);
 
 const htmlPath = path.join(__dirname, 'public');

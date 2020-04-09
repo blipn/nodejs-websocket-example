@@ -1,3 +1,7 @@
+// if(window.location.protocol != 'https:') {
+//   location.href = location.href.replace("http://", "https://");
+// }
+
 let hashTag = 'Tristan'
 $('#pseudo').val('Unknown')
 $('#hashTag').val(hashTag)
