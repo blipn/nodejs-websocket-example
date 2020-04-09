@@ -41,7 +41,7 @@
       </div>
       <div class="input-group-btn">
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary square" data-toggle="modal" data-target="#exampleModal">
+        <button type="button" class="btn btn-primary square" data-toggle="modal" data-target="#exampleModal" aria-label="Display Hashtags">
           #
         </button>      
       </div>
@@ -49,7 +49,7 @@
         <input placeholder="#" id="hashTag" list="hashtags" autocomplete="off" class="form-control" />     
       </div>
       <div class="input-group-btn">
-        <button class="btn btn-primary square">Select</button>   
+        <button class="btn btn-primary square" aria-label="Select Login">Select</button>   
       </div>
 
       
@@ -62,7 +62,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">#List of current Hashtags</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close HashtagsModal">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -72,7 +72,6 @@
 
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
@@ -84,7 +83,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="modalMapLabel">Map</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close MapModal">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -132,17 +131,17 @@
       <form id="msgForm" class="input-group form-search" action="">
         <input class="form-control search-query" id="msg" placeholder="..." autocomplete="off" />
         <div class="input-group-btn">
-          <button class="btn btn-primary">Send</button>
+          <button class="btn btn-primary" aria-label="Send Message">Send</button>
         </div>
       </form>
 
       <div class="input-group-btn">
-        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalMap">
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalMap" aria-label="Display MapModal">
           <span class="glyphicon glyphicon-globe" style="top: 3px"></span>
         </button>
       </div>
       <div class="input-group-btn">
-        <button id="install" class="btn btn-primary">PWA COM</button>
+        <button id="install" class="btn btn-primary" aria-label="Install PWA">PWA COM</button>
       </div>
       
       
