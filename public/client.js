@@ -50,7 +50,7 @@ $(() => {
     messages.appendChild(popover)
 
     try {
-      L.marker([latitude, longitude]).addTo(map)
+      L.marker([latitude, longitude]).addTo(map).bindPopup(from)
     } catch (error) {
       console.log(error)
     }
