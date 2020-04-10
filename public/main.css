@@ -42,6 +42,7 @@ form button {
 
 .modal-content {
   height: 94vh;
+  overflow: auto;
 }
 
 .form-control {
