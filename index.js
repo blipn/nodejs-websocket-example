@@ -8,7 +8,7 @@ const app = express();
 
 const http = require('http').Server(app);
 
-const htmlPath = path.join(__dirname, 'public');
+const htmlPath = path.join(__dirname, 'public2/source');
 
 if (process.env.NODE_ENV !== 'development') {
   app.use(sslRedirect());
