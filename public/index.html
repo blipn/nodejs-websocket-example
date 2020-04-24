@@ -5,18 +5,18 @@
     <title>Pwa-Com</title>
     <link rel="manifest" href="/manifest.webmanifest">
 
-    <!-- Chrome --> 
+    <!-- Chrome -->
     <link rel="icon" sizes="192x192" href="images/icons/logo-192-192.png"><link rel="apple-touch-icon" href="images/icons/logo-192-192.png">
-    <!-- Safari --> 
+    <!-- Safari -->
     <link rel="apple-touch-startup-image" href="images/icons/logo-192-192.png">
-    <!-- IE --> 
+    <!-- IE -->
     <meta name="msapplication-square310x310logo" content="images/icons/logo-192-192.png">
-    <!-- Chrome --> 
-    <meta name="theme-color" content="#4285f4"> 
-    <!-- Safari --> 
+    <!-- Chrome -->
+    <meta name="theme-color" content="#4285f4">
+    <!-- Safari -->
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-    <!-- for mobile --> 
+    <!-- for mobile -->
     <meta name="viewport" content="width=device-width">
 
     <!-- bootflat -->
@@ -44,17 +44,17 @@
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary square" data-toggle="modal" data-target="#exampleModal" aria-label="Display Hashtags">
           #
-        </button>      
+        </button>
       </div>
       <div class="col">
         <label>Hashtag</label>
-        <input placeholder="#" id="hashTag" list="hashtags" autocomplete="off" class="form-control" /> 
+        <input placeholder="#" id="hashTag" list="hashtags" autocomplete="off" class="form-control" />
       </div>
       <div class="input-group-btn">
-        <button class="btn btn-primary square" aria-label="Select Login">Select</button>   
+        <button class="btn btn-primary square" aria-label="Select Login">Select</button>
       </div>
 
-      
+
       <datalist id="hashtags"></datalist>
     </form>
 
@@ -129,7 +129,7 @@
               } else {
                 document.getElementById("underMap").style.display = 'block';
               }
-              
+
 
             </script>
 
@@ -159,10 +159,20 @@
       <div class="input-group-btn">
         <button id="install" class="btn btn-primary" aria-label="Install PWA">Install</button>
       </div>
-      
-      
+
+
     </div>
 
+    <script>
+      function isFacebookApp() {
+             var ua = navigator.userAgent || navigator.vendor || window.opera;
+             return (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1);
+         }
+         if(isFacebookApp()){
+              // your action here if user using Facebook in-app browser
+             alert('Are you using Facebook Browser? To get better experience, try press [...] and Open the blog in Chrome or Safari. Thank you!');
+         }
+     </script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
