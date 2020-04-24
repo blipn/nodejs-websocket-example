@@ -10,24 +10,28 @@ $('#hashTag').val(hashTag)
  * Notifications
  */
 
-Notification.requestPermission(function(status) {
-  console.log('Notification permission status:', status);
-});
+try {
+  Notification.requestPermission(function(status) {
+    console.log('Notification permission status:', status);
+  });
 
-function displayNotification(title, text) {
-  if (Notification.permission == 'granted') {
-    navigator.serviceWorker.getRegistration().then(function(reg) {
-      reg.showNotification(title, {
-        tag: 'TheOnlyNotification',
-        body: text,
-        icon: 'images/icons/logo-192-192.png',
-        vibrate: [200, 50, 200, 50],
-        data: {
-          url: '/'
-        }
+  function displayNotification(title, text) {
+    if (Notification.permission == 'granted') {
+      navigator.serviceWorker.getRegistration().then(function(reg) {
+        reg.showNotification(title, {
+          tag: 'TheOnlyNotification',
+          body: text,
+          icon: 'images/icons/logo-192-192.png',
+          vibrate: [200, 50, 200, 50],
+          data: {
+            url: '/'
+          }
+        })
       })
-    })
+    }
   }
+} catch (error) {
+  console.log('No browser support for notifications')
 }
 
 function randomId() {
@@ -106,7 +110,12 @@ $(() => {
     })
     socket.emit('getMessages', { hashTag, from })
     socket.on(hashTag, (msg) => {
-      if(msg.id!==myId){displayNotification(`New message from ${msg.from}`, msg.message)}
+      if(msg.id!==myId){
+        try {
+          displayNotification(`New message from ${msg.from}`, msg.message)
+        } catch (error) {
+          //
+        }}
       show(msg.from, msg.message, msg.id, msg.latitude, msg.longitude, msg.type)
       window.scrollTo(0, document.body.scrollHeight)
     })
