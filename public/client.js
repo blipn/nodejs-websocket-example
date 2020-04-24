@@ -1,5 +1,9 @@
-let hashTag = 'Tristan'
-$('#pseudo').val('Unknown')
+let hashTag = localStorage.getItem('hashTag') || 'Tristan'
+
+const myId = localStorage.getItem('myId') || randomId()
+localStorage.setItem('myId', myId);
+
+$('#pseudo').val(localStorage.getItem('pseudo') || 'Unknown')
 $('#hashTag').val(hashTag)
 
 Notification.requestPermission(function(status) {
@@ -26,8 +30,6 @@ function randomId() {
   const uint32 = window.crypto.getRandomValues(new Uint32Array(1))[0];
   return uint32.toString(16);
 }
-
-const myId = randomId();
 
 $(() => {
   const socket = io()
@@ -131,7 +133,9 @@ $(() => {
   function submitTagForm() {
     socket.off(hashTag)
     hashTag = $('#hashTag').val()
+    localStorage.setItem('hashTag', hashTag);
     from = $('#pseudo').val()
+    localStorage.setItem('pseudo', from);
     listen(hashTag, from)
 
     return false
