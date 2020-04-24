@@ -32,6 +32,10 @@
     crossorigin=""></script>
     <meta name="description" content="Application de communication par hashtags" />
     <link rel="stylesheet" href="/main.css">
+    <script src="https://browser.sentry-cdn.com/5.15.5/bundle.min.js" integrity="sha384-wF7Jc4ZlWVxe/L8Ji3hOIBeTgo/HwFuaeEfjGmS3EXAG7Y+7Kjjr91gJpJtr+PAT" crossorigin="anonymous"></script>
+    <script>
+      Sentry.init({ dsn: 'https://6767545671c2470b937d7719a4d33bea@o381727.ingest.sentry.io/5212141' })
+    </script>
   </head>
 
   <body id="requireHTTPS">
@@ -162,7 +166,6 @@
 
 
     </div>
-
     <script>
       function isFacebookApp() {
              var ua = navigator.userAgent || navigator.vendor || window.opera;
