@@ -6,8 +6,10 @@
     "express": "^4.15.2",
     "heroku-ssl-redirect": "0.0.4",
     "qrcode-terminal": "^0.12.0",
+    "sharp": "^0.25.2",
     "socket-anti-spam": "^2.0.0",
-    "socket.io": "^1.7.3"
+    "socket.io": "^1.7.3",
+    "uuid": "^7.0.3"
   },
   "scripts": {
     "start": "node index.js",

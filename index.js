@@ -9,6 +9,7 @@ const app = express();
 const http = require('http').Server(app);
 
 const htmlPath = path.join(__dirname, 'public');
+const uploadDir = path.join(__dirname, 'public/images/upload');
 
 if (process.env.NODE_ENV !== 'development') {
   app.use(sslRedirect());
@@ -30,4 +31,4 @@ http.listen(port, () => {
   console.log(`listening on *:${port}`);
 });
 
-require('./src/server.js')(http);
+require('./src/server.js')(http, uploadDir);

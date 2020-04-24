@@ -1,5 +1,8 @@
+const sharp = require('sharp');
+const path = require('path');
+const uuidv4 = require('uuid/v4');
 /* eslint-disable global-require */
-module.exports = (http) => {
+module.exports = (http, uploadDir) => {
   const SocketAntiSpam = require('socket-anti-spam');
   const io = require('socket.io')(http);
   const hashtags = {};
@@ -42,6 +45,7 @@ module.exports = (http) => {
         id: msg.id,
         latitude: msg.latitude,
         longitude: msg.longitude,
+        type: msg.type,
         from,
         message: msg.message,
         timeStamp: new Date(),
@@ -54,12 +58,29 @@ module.exports = (http) => {
         // Ajout du hashtag
         addHashtag(msg);
       }
+
+      if (data.type === 'img') {
+        const name = uuidv4();
+        sharp(data.message)
+          .resize(250)
+          .webp()
+          .toFile(path.join(uploadDir, `${name}.webp`), (err, info) => {
+            if (err) { console.error(err); } else {
+              console.log(info);
+              data.message = `/images/upload/${name}.webp`;
+              // Envoi du message
+              io.emit(msg.hashTag, data);
+            }
+          });
+      } else {
+        // Envoi du message
+        io.emit(msg.hashTag, data);
+      }
+
       // Stockage du message
       hashtags[msg.hashTag].push(data);
       // console.log(hashtags)
 
-      // Envoi du message
-      io.emit(msg.hashTag, data);
     });
   });
 };

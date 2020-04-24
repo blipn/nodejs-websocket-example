@@ -147,6 +147,14 @@
     </div>
 
     <div id="footer" class="input-group">
+      <div class="input-group-btn bottomBar">
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalMap" aria-label="Display MapModal">
+          <span class="glyphicon glyphicon-globe" style="top: 3px"></span>
+        </button>
+        <input id="myPhotoInput" class="photoInput btn btn-secondary" type="file" accept="image/*" capture="camera"/>
+        <button id="install" class="btn btn-primary" aria-label="Install PWA">Install</button>
+        <button class="btn btn-primary" aria-label="features">features inc</button>
+      </div>
       <form id="msgForm" class="input-group form-search" action="">
         <label>Message</label>
         <input class="form-control search-query" id="msg" placeholder="..." autocomplete="off" />
@@ -154,17 +162,6 @@
           <button class="btn btn-primary" aria-label="Send Message">Send</button>
         </div>
       </form>
-
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalMap" aria-label="Display MapModal">
-          <span class="glyphicon glyphicon-globe" style="top: 3px"></span>
-        </button>
-      </div>
-      <div class="input-group-btn">
-        <button id="install" class="btn btn-primary" aria-label="Install PWA">Install</button>
-      </div>
-
-
     </div>
     <script>
       function isFacebookApp() {

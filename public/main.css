@@ -1,15 +1,15 @@
-body { 
+body {
   font: 24px Helvetica, Arial;
   background-color: #e9e9e9; }
-#hashtagsList { 
+#hashtagsList {
   list-style: none;
   font-size: x-large;
   line-height: 2;
   margin-left: 10%; }
-form button { 
+form button {
   width: auto;
-  background: rgb(224, 224, 224); 
-  border: none; 
+  background: rgb(224, 224, 224);
+  border: none;
   padding: 10px; }
 #footer {
   padding: 5px;
@@ -24,15 +24,15 @@ form button {
 }
 #bodyMsg {
   margin-top: 8vh;
-  padding-bottom: 6vh;
+  padding-bottom: 12vh;
   z-index: 0;
   position: relative;
 }
 #msgForm {
   margin-right: 3px;
 }
-#messages { 
-  list-style-type: none; 
+#messages {
+  list-style-type: none;
   margin: 20px;
   overflow: auto;
 }
@@ -83,4 +83,43 @@ form button {
 }
 label {
   display: none;
+}
+
+.custom-file-input::before {
+  content: 'Select some files';
+  display: inline-block;
+  background: linear-gradient(top, #f9f9f9, #e3e3e3);
+  border: 1px solid #999;
+  border-radius: 3px;
+  padding: 5px 8px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-weight: 700;
+  font-size: 10pt;
+}
+.custom-file-input:hover::before {
+  border-color: black;
+}
+.custom-file-input:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
+.photoInput::-webkit-file-upload-button {
+  display: none;
+}
+
+.photoInput{
+  background-image: url('/images/photo.svg');
+  background-size: 25px;
+  background-repeat: no-repeat;
+  background-position: center;
+  font-size: 0;
+  padding-left: 30px;
+}
+
+.bottomBar {
+   display: flex;
 }

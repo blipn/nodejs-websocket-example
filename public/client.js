@@ -6,6 +6,10 @@ localStorage.setItem('myId', myId);
 $('#pseudo').val(localStorage.getItem('pseudo') || 'Unknown')
 $('#hashTag').val(hashTag)
 
+/**
+ * Notifications
+ */
+
 Notification.requestPermission(function(status) {
   console.log('Notification permission status:', status);
 });
@@ -56,7 +60,7 @@ $(() => {
     }
   }
 
-  function show(from, message, id, latitude, longitude) {
+  function show(from, message, id, latitude, longitude, type='text') {
     // $('#messages').append($('<li>').text(`${from} : ${message}`))
     const messages = document.querySelector("#messages")
     const popover = document.createElement("div")
@@ -66,7 +70,13 @@ $(() => {
     title.appendChild(document.createTextNode(from))
     const content = document.createElement("div")
     content.setAttribute('class', 'popover-content')
-    content.appendChild(document.createTextNode(message))
+    if(type==='img') {
+      const img = document.createElement("img")
+      img.setAttribute("src", message);
+      content.appendChild(img)
+    } else {
+      content.appendChild(document.createTextNode(message))
+    }
     popover.appendChild(title)
     popover.appendChild(content)
     messages.appendChild(popover)
@@ -85,7 +95,7 @@ $(() => {
   function newRoom(data) {
     $('#messages').html('')
     data.forEach((element) => {
-      show(element.from, element.message, element.id, element.latitude, element.longitude)
+      show(element.from, element.message, element.id, element.latitude, element.longitude, element.type)
     })
   }
 
@@ -97,7 +107,7 @@ $(() => {
     socket.emit('getMessages', { hashTag, from })
     socket.on(hashTag, (msg) => {
       if(msg.id!==myId){displayNotification(`New message from ${msg.from}`, msg.message)}
-      show(msg.from, msg.message, msg.id, msg.latitude, msg.longitude)
+      show(msg.from, msg.message, msg.id, msg.latitude, msg.longitude, msg.type)
       window.scrollTo(0, document.body.scrollHeight)
     })
     show('*', `Connected on #${hashTag} as ${from}`, '*')
@@ -111,8 +121,18 @@ $(() => {
     updateList(newList)
   })
 
-  function submitMsgForm() {
-    message = $('#msg').val()
+  // send message
+
+  function submitMsgForm(e, photo=false) {
+    let message
+    let type = null
+    if(photo) {
+      message = photo
+      type = 'img'
+    } else {
+      message = $('#msg').val()
+      $('#msg').val('')
+    }
 
     let latitude = null
     let longitude = null
@@ -124,11 +144,30 @@ $(() => {
       console.log('You need to activate your geolocation')
     }
 
-    socket.emit('message', { hashTag, from, message, id:myId, latitude, longitude })
-    $('#msg').val('')
+    socket.emit('message', { hashTag, from, message, id:myId, latitude, longitude, type })
+
     return false
   }
   $('#msgForm').submit(submitMsgForm)
+
+
+  /**
+   * Photos system
+   */
+
+  const photoInput = document.getElementById('myPhotoInput');
+
+  function sendPic() {
+      const file = photoInput.files[0];
+      submitMsgForm(null ,file)
+      // Send file here either by adding it to a `FormData` object
+      // and sending that via XHR, or by simply passing the file into
+      // the `send` method of an XHR instance.
+  }
+  photoInput.addEventListener('change', sendPic, false);
+
+
+  // follow a hashtag
 
   function submitTagForm() {
     socket.off(hashTag)
