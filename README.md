@@ -9,7 +9,7 @@ There is no persistant data on this heroku server.
 ## Wiki
 See our [Wiki](https://github.com/blipn/pwa-com-pub/wiki) here 
 
-## Deployed client
+## Deployed client/server
 Access the PWA [here](https://pwa-com.herokuapp.com/) hosted with Heroku
 
 You can easily deploy your own instance in one click :
