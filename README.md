@@ -26,6 +26,11 @@ npm install
 npm start
 ```
 
+Run for testing with ngrok and QrCode
+```
+npm run dev
+```
+
 ## Screenshot
 
 <img src="https://github.com/blipn/pwa-com-pub/blob/master/wiki/screen0.jpg" width="30%">

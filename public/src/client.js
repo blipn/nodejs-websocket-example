@@ -1,9 +1,15 @@
+const queryString = window.location.search
+const urlParams = new URLSearchParams(queryString)
+
+if(urlParams.get('ht')) localStorage.setItem('hashTag', urlParams.get('ht'))
+
 let hashTag = localStorage.getItem('hashTag') || 'Tristan'
 
 const myId = localStorage.getItem('myId') || randomId()
 localStorage.setItem('myId', myId);
 
 $('#pseudo').val(localStorage.getItem('pseudo') || 'Unknown')
+
 $('#hashTag').val(hashTag)
 
 /**
@@ -181,6 +187,7 @@ $(() => {
   function submitTagForm() {
     socket.off(hashTag)
     hashTag = $('#hashTag').val()
+    console.log(hashTag)
     localStorage.setItem('hashTag', hashTag);
     from = $('#pseudo').val()
     localStorage.setItem('pseudo', from);
@@ -190,4 +197,30 @@ $(() => {
   }
   $('#tagForm').submit(submitTagForm)
   submitTagForm()
+
+  // share # 
+  const shareBtn = document.getElementById("shareBtn")
+  shareBtn.addEventListener('click', () => {
+    if (navigator.share) {
+      console.log(`${window.location.hostname}?ht=${hashTag}`)
+      navigator.share({
+        url: `?ht=${hashTag}`,
+        title: `${document.title} #${hashTag}`
+      })
+    } else {
+      const copyToClipboard = str => {
+        const el = document.createElement('textarea');
+        el.value = str;
+        el.setAttribute('readonly', '');
+        el.style.position = 'absolute';
+        el.style.left = '-9999px';
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+      };
+      copyToClipboard(`${window.location.hostname}?ht=${hashTag}`)
+    }
+  })
+
 })

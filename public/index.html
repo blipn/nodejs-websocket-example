@@ -31,7 +31,7 @@
     integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
     crossorigin=""></script>
     <meta name="description" content="Application de communication par hashtags" />
-    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="/style/main.css">
     <script src="https://browser.sentry-cdn.com/5.15.5/bundle.min.js" integrity="sha384-wF7Jc4ZlWVxe/L8Ji3hOIBeTgo/HwFuaeEfjGmS3EXAG7Y+7Kjjr91gJpJtr+PAT" crossorigin="anonymous"></script>
     <script>
       Sentry.init({ dsn: 'https://6767545671c2470b937d7719a4d33bea@o381727.ingest.sentry.io/5212141' })
@@ -39,6 +39,8 @@
   </head>
 
   <body id="requireHTTPS">
+
+    <!-- Header -->
     <form id="tagForm" class="input-group" action="">
       <div class="col">
         <label>Pseudo</label>
@@ -57,12 +59,10 @@
       <div class="input-group-btn">
         <button class="btn btn-primary square" aria-label="Select Login">Select</button>
       </div>
-
-
       <datalist id="hashtags"></datalist>
     </form>
 
-    <!-- Modal -->
+    <!-- Modal # -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -73,9 +73,7 @@
             </button>
           </div>
           <div class="modal-body">
-
             <ul data-dismiss="modal" id="hashtagsList"></ul>
-
           </div>
           <div class="modal-footer">
           </div>
@@ -96,56 +94,18 @@
           <div class="modal-body">
             <div id="underMap" style="text-align: center;"><b style="color: red;">Geolocation is not supported or inactive</b></div>
             <div id="map" style="height: 70vh; width: 100%;"></div>
-            <script>
-
-              let latLong = null
-
-              var map = L.map('map', {
-                    center: [5, 5],
-                    zoom: 5
-              });
-
-              function showPosition(position) {
-                latLong = position.coords
-
-                if(!latLong.latitude || !latLong.longitude) {
-                  document.getElementById("underMap").style.display = 'block';
-                } else {
-                  document.getElementById("underMap").style.display = 'none';
-                }
-
-                map.setView([position.coords.latitude, position.coords.longitude], 13);
-
-                L.tileLayer('//{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
-                    maxZoom: 18,
-                }).addTo(map);
-
-                L.marker([position.coords.latitude, position.coords.longitude]).addTo(map)
-
-                setInterval(()=>{
-                  map.invalidateSize()
-                }, 1000)
-
-              }
-
-              if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition);
-              } else {
-                document.getElementById("underMap").style.display = 'block';
-              }
-
-
-            </script>
-
+            <script src="/src/position.js" ></script>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- Messages -->
     <div id="bodyMsg">
       <div class="example-popover" id="messages"></div>
     </div>
 
+    <!-- Footer -->
     <div id="footer" class="input-group">
       <div class="input-group-btn bottomBar">
         <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalMap" aria-label="Display MapModal">
@@ -153,7 +113,7 @@
         </button>
         <input id="myPhotoInput" class="photoInput btn btn-secondary" type="file" accept="image/*" capture="camera"/>
         <button id="install" class="btn btn-primary" aria-label="Install PWA">Install</button>
-        <button class="btn btn-primary" aria-label="features">features inc</button>
+        <button id="shareBtn" class="btn btn-primary" aria-label="features">Share</button>
       </div>
       <form id="msgForm" class="input-group form-search" action="">
         <label>Message</label>
@@ -165,19 +125,19 @@
     </div>
     <script>
       function isFacebookApp() {
-             var ua = navigator.userAgent || navigator.vendor || window.opera;
-             return (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1);
-         }
-         if(isFacebookApp()){
-              // your action here if user using Facebook in-app browser
-             alert('Are you using Facebook Browser? To get better experience, try press [...] and Open the blog in Chrome or Safari. Thank you!');
-         }
+          var ua = navigator.userAgent || navigator.vendor || window.opera;
+          return (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1);
+      }
+      if(isFacebookApp()){
+          // your action here if user using Facebook in-app browser
+          alert('Are you using Facebook Browser? To get better experience, try press [...] and Open the blog in Chrome or Safari. Thank you!');
+      }
      </script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-    <script src="/app.js" ></script>
-    <script src="/client.js" ></script>
+    <script src="/src/app.js" ></script>
+    <script src="/src/client.js" ></script>
     <script src="/install.js" ></script>
   </body>
 
